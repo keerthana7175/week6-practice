@@ -1,0 +1,201 @@
+package keerthanaprogram;
+import java.util.Scanner;
+public class EmployApp {
+
+	    Scanner s = new Scanner(System.in);
+	    EmployVariable[] emp;
+	    int n;
+	    long id;
+	    String dep, pro;
+
+	    public void addDetails() {
+	        System.out.print("Enter the number of Employ Details you want to enter : ");
+	        n = s.nextInt();
+	        emp = new EmployVariable[n];
+	        for (int i = 0; i < n; i++) {
+	            EmployVariable var = new EmployVariable();
+	            System.out.println("Enter Employ ID : ");
+	            var.setEmployID(s.nextLong());
+	            System.out.println("Enter Employ Name : ");
+	            var.setEmpName(s.next());
+	            System.out.println("Enter Employ Salary : ");
+	            var.setEmpSalary(s.nextLong());
+	            System.out.println("Enter Employ Department Name : ");
+	            var.setDeptName(s.next());
+	            System.out.println("Enter Employ Project Name : ");
+	            var.setProjectName(s.next());
+	            emp[i] = var;
+	        }
+	    }
+
+	    public void searchbyID() {
+	        System.out.println("Enter the Employ ID whose details you want to search : ");
+	        id = s.nextLong();
+	        int count = 0;
+	        for (int i = 0; i < n; i++) {
+	            if (id == emp[i].getEmployID()) {
+	                System.out.println("Employ ID : " + emp[i].getEmployID());
+	                System.out.println("Employ Name : " + emp[i].getEmpName());
+	                System.out.println("Employ Salary is : " + emp[i].getEmpSalary());
+	                System.out.println("Employ Department Name : " + emp[i].getDeptName());
+	                System.out.println("Employ Project Name : " + emp[i].getProjectName());
+	                count++;
+	            }
+	        }
+	        if (count == 0) {
+	            System.out.println("Employ Details with the entered Employ ID doesn't exist");
+	        }
+	    }
+
+	    public void specificEmployUsingSalary() {
+	        System.out.print("Enter Minimum Salary : ");
+	        int min = s.nextInt();
+	        System.out.print("Enter Maximum Salary : ");
+	        int max = s.nextInt();
+	        int count1 = 0;
+	        for (int i = 0; i < n; i++) {
+	            if (emp[i].getEmpSalary() >= min && emp[i].getEmpSalary() <= max) {
+	                System.out.println("Employ ID : " + emp[i].getEmployID());
+	                System.out.println("Employ Name : " + emp[i].getEmpName());
+	                System.out.println("Employ Salary is : " + emp[i].getEmpSalary());
+	                System.out.println("Employ Department Name : " + emp[i].getDeptName());
+	                System.out.println("Employ Project Name : " + emp[i].getProjectName());
+	                count1++;
+	            }
+	        }
+	        if (count1 == 0) {
+	            System.out.println("Employees details between " + min + " and " + max + " salary doesn't exist");
+	        }
+	    }
+
+	    public void displayingUsingDepartment() {
+	        System.out.println("Enter the Department Name : ");
+	        dep = s.next();
+	        int count2 = 0;
+	        for (int i = 0; i < n; i++) {
+	            if (dep.equals(emp[i].getDeptName())) {
+	                System.out.println("Employ ID : " + emp[i].getEmployID());
+	                System.out.println("Employ Name : " + emp[i].getEmpName());
+	                System.out.println("Employ Salary is : " + emp[i].getEmpSalary());
+	                System.out.println("Employ Department Name : " + emp[i].getDeptName());
+	                System.out.println("Employ Project Name : " + emp[i].getProjectName());
+	                count2++;
+	            }
+	        }
+	        if (count2 == 0) {
+	            System.out.println("Employ Details with the entered department name doesn't exist");
+	        }
+	    }
+
+	    public void displayingUsingProject() {
+	        System.out.println("Enter the project name : ");
+	        pro = s.next();
+	        int count3 = 0;
+	        for (int i = 0; i < n; i++) {
+	            if (pro.equals(emp[i].getProjectName())) {
+	                System.out.println("Employ ID : " + emp[i].getEmployID());
+	                System.out.println("Employ Name : " + emp[i].getEmpName());
+	                System.out.println("Employ Salary is : " + emp[i].getEmpSalary());
+	                System.out.println("Employ Department Name : " + emp[i].getDeptName());
+	                System.out.println("Employ Project Name : " + emp[i].getProjectName());
+	                count3++;
+	            }
+	        }
+	        if (count3 == 0) {
+	            System.out.println("Employ Details with the entered project name doesn't exist");
+	        }
+	    }
+
+	    public void deletingUsingID() {
+	        System.out.println("Enter Employ ID whose details you want to delete");
+	        id = s.nextInt();
+	        for (int i = 0; i < n; i++) {
+	            if (id == emp[i].getEmployID()) {
+	                emp[i].setEmployID(0);
+	                emp[i].setEmpName("0");
+	                emp[i].setEmpSalary(0);
+	                emp[i].setDeptName("0");
+	                emp[i].setProjectName("0");
+	            }
+	        }
+	    }
+
+	    public void updateDetailsUsingID() {
+	        System.out.println("Enter the Employ ID whose details you want to update");
+	        id = s.nextLong();
+	        for (int i = 0; i < n; i++) {
+	            if (id == emp[i].getEmployID()) {
+	                EmployVariable var1 = new EmployVariable();
+	                System.out.println("Employ ID : " + emp[i].getEmployID());
+	                System.out.println("Please enter the correct ID");
+	                var1.setEmployID(s.nextLong());
+	                System.out.println("Employ Name : " + emp[i].getEmpName());
+	                System.out.println("Enter the correct name of the Employ");
+	                var1.setEmpName(s.next());
+	                System.out.println("Employ Salary is : " + emp[i].getEmpSalary());
+	                System.out.println("Enter the correct Salary of the Employ");
+	                var1.setEmpSalary(s.nextLong());
+	                System.out.println("Employ Department Name : " + emp[i].getDeptName());
+	                System.out.println("Enter the correct Department name of the Employ");
+	                var1.setDeptName(s.next());
+	                System.out.println("Employ Project Name : " + emp[i].getProjectName());
+	                System.out.println("Enter the correct Project Name of the Employ");
+	                var1.setProjectName(s.next());
+	                emp[i] = var1;
+	            }
+	        }
+	    }
+
+	    public void viewOptions() {
+	        int option = 0;
+	        do {
+	            
+	            System.out.println("1. Search Employ Details by Employ ID");
+	            System.out.println("2. Displaying Employ Details between Specific Salary");
+	            System.out.println("3. Displaying Employ Details with Specific Department");
+	            System.out.println("4. Displaying Employ Details from Specific Project");
+	            System.out.println("5. Deleting Employ Details Based on Employ ID");
+	            System.out.println("6. Update Emply Details");
+	            System.out.println("7. Exit");
+	         
+	            System.out.println("choose an option");
+	            option = s.nextInt();
+	        
+	            switch (option) {
+	                case 1:
+	                    searchbyID();
+	                    break;
+	                case 2:
+	                    specificEmployUsingSalary();
+	                    break;
+	                case 3:
+	                    displayingUsingDepartment();
+	                    break;
+	                case 4:
+	                    displayingUsingProject();
+	                    break;
+	                case 5:
+	                    deletingUsingID();
+	                    break;
+	                case 6:
+	                    updateDetailsUsingID();
+	                case 7:
+	                    System.out.println("Thank you for using EmployeeApp...!");
+	                    break;
+	                default:
+	                    System.out.println("Enter a Valid Option");
+	                    break;
+	            }
+	        } while (option != 7);
+	    }
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		EmployApp obj = new EmployApp();
+        obj.addDetails();
+        obj.viewOptions();
+
+	}
+
+}

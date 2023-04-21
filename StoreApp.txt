@@ -1,0 +1,110 @@
+class ProductNotFoundException extends Exception {
+public ProductNotFoundException(String message) {
+        super(message);
+    }
+
+}
+
+class Product {
+    String pName;
+    double price;
+
+    
+    public Product(String name, double price) {
+        this.pName = name;
+        this.price = price;
+    }
+
+    
+    public String getPName() {
+        return pName;
+    }
+
+    
+    public double getPrice() {
+        return price;
+    }
+}
+
+class Store {
+    Product[] products = new Product[10]; 
+    int productCount = 0; 
+   
+    public void addProduct(Product prod) {
+        products[productCount++] = prod;
+    }
+
+    
+    public void removeProduct(String name) throws ProductNotFoundException {
+        boolean found = false;
+        for (int i = 0; i < productCount; i++) {
+            if (products[i].getPName().equals(name)) {
+               
+                for (int j = i; j < productCount - 1; j++) {
+                    products[j] = products[j + 1];
+                }
+                products[productCount - 1] = null; 
+                productCount--; 
+                found = true;
+                break; 
+            }
+        }
+        if (!found) {
+            throw new ProductNotFoundException(); 
+        }
+    }
+
+   
+    public void displayProducts() {
+        System.out.println("Products in the store:");
+        for (int i = 0; i < productCount; i++) {
+            System.out.println(products[i].getPName() + " - " + products[i].getPrice());
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Store store = new Store();
+
+        while (true) {
+            System.out.println("1. Add product");
+            System.out.println("2. Remove product");
+            System.out.println("3. Display products");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter product name: ");
+                    String name = scanner.next();
+                    System.out.print("Enter product price: ");
+                    double price = scanner.nextDouble();
+                    Product prod = new Product(name, price);
+                    store.addProduct(prod);
+                    System.out.println("Product added successfully!");
+                    break;
+                case 2:
+                    System.out.print("Enter product name to remove: ");
+                    String removeName = scanner.next();
+                    try {
+                        store.removeProduct(removeName);
+                        System.out.println("Product removed successfully!");
+                    } catch (ProductNotFoundException e) {
+                        System.out.println("Product not found in store!");
+                    }
+                    break;
+                case 3:
+                    store.displayProducts();
+                    break;
+                case 4:
+                    System.out.println("Sucessfuly wdone with Store...");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice, please try again.");
+                    break;
+            }
+        }
+   
